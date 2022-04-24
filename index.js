@@ -5,8 +5,7 @@ let gridHolder = document.getElementById("xoGrid");
 let fields = Array.from(gridHolder.querySelectorAll(".field"));
 let shape = '<span class="x"></span>';
 
-function UpdateGrid(NewGrid){
-    NewGrid = grid //remove when got some shit
+function UpdateGrid(NewGrid){ //remove when got some shit
 
     let f = 0;
     for(let i = 0; i<3; i++){
@@ -25,7 +24,8 @@ function UpdateGrid(NewGrid){
 
 }
 
-function Pick(e){//gotta check if there is more playable space
+function Pick(e){//add grid update pard in Pick()
+    //gotta check if there is more playable space
     let coordinates = {
         row: e.target.getAttribute("data-row"),
         col: e.target.getAttribute("data-column")
@@ -34,18 +34,22 @@ function Pick(e){//gotta check if there is more playable space
     if(grid[coordinates.row][coordinates.col] != null)return;//checks if field is empty
     
     grid[coordinates.row][coordinates.col] = shape;
-    UpdateGrid()
+    UpdateGrid(grid)
     CheckGrid()
     //check if gamemode is online and if its not change shape
     ChangeShape()
 }
 
-function ChangeShape(){
+function ChangeShape(){//HIGHLIGHT WHOS TURN IS IT
     if(shape == '<span class="x"></span>'){
         shape = '<span class="o"></span>'
+        document.getElementById("scoreX").parentNode.classList.remove("playing")
+        document.getElementById("scoreO").parentNode.classList.add("playing")
     }
     else{
         shape = '<span class="x"></span>'
+        document.getElementById("scoreO").parentNode.classList.remove("playing")
+        document.getElementById("scoreX").parentNode.classList.add("playing")
     }
 }
 
@@ -79,7 +83,6 @@ function CheckGrid(){
             Win("diagonal", 4, grid[1][1])
         }
     }
-
     if(grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]){
         if(grid[1][1] != null){
             console.log("diagonal2")
@@ -91,7 +94,8 @@ function CheckGrid(){
 
 
 function Win(axis, index, winner){
-    gridHolder.style.pointerEvents = "none";
+    gridHolder.style.pointerEvents = "none";//disables input
+    winner = winner.charAt(13);
     let winLine = document.getElementById("winLine");
     let Multiplier;
 
@@ -132,15 +136,27 @@ function Win(axis, index, winner){
 
     //winLine.classList.add("horizontal-win")
 
-    console.log("winner is: " + winner.charAt(13) )
+    console.log("winner is: " + winner)
+    if(winner == "x"){
+        document.getElementById("scoreX").innerHTML = parseInt(document.getElementById("scoreX").innerHTML)+1;
+        document.getElementById("scoreX").parentNode.classList.add("winner")
+    }else{
+        document.getElementById("scoreO").innerHTML = parseInt(document.getElementById("scoreO").innerHTML)+1;
+        document.getElementById("scoreO").parentNode.classList.add("winner")
+    }
+    //update score
 
     setTimeout(() => {
+        grid = [[null, null, null], [null, null, null], [null, null, null]];
+        UpdateGrid(grid)
+
         winLine.classList.remove("horizontal-win")
         winLine.classList.remove("vertical-win")
         winLine.classList.remove("diagonal-win")
         winLine.style = null
-        //trigger endscreen or sum bullshit
-        //reset game
+        document.getElementsByClassName("winner")[0].classList.remove("winner")
+        //trigger endscreen or sum bullshit LIKE ANIMATION
+        gridHolder.style.pointerEvents = "all";
     }, 2000);
 }
 
