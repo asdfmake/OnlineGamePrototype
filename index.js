@@ -3,6 +3,7 @@ let grid = [[null, null, null], [null, null, null], [null, null, null]];
 //let grid = [[], [], []]
 let gridHolder = document.getElementById("xoGrid");
 let fields = Array.from(gridHolder.querySelectorAll(".field"));
+let gamemode = "";
 let shape = '<span class="x"></span>';
 
 function UpdateGrid(NewGrid){ //remove when got some shit
@@ -24,7 +25,7 @@ function UpdateGrid(NewGrid){ //remove when got some shit
 
 }
 
-function Pick(e){//add grid update pard in Pick()
+function Pick(e){
     //gotta check if there is more playable space
     let coordinates = {
         row: e.target.getAttribute("data-row"),
@@ -32,12 +33,21 @@ function Pick(e){//add grid update pard in Pick()
     }
 
     if(grid[coordinates.row][coordinates.col] != null)return;//checks if field is empty
-    
-    grid[coordinates.row][coordinates.col] = shape;
+
+    addToGrid(coordinates.row, coordinates.col, shape);
     UpdateGrid(grid)
+
+    if(gamemode == "online"){
+        togglePlayable(flase);
+        return;
+    }
     CheckGrid()
-    //check if gamemode is online and if its not change shape
     ChangeShape()
+}
+
+function addToGrid(row, col, shape){
+    if(grid[row][col] != null)return;//DOUBLE checks if field is empty
+    grid[row][col] = shape;
 }
 
 function ChangeShape(){//HIGHLIGHT WHOS TURN IS IT
@@ -92,9 +102,25 @@ function CheckGrid(){
 
 }
 
+function togglePlayable(playable){
+    switch(playable){
+        case true:
+            gridHolder.style.pointerEvents = "all";
+            break;
+        case false:
+            gridHolder.style.pointerEvents = "none";
+            break;
+        case null:
+            if(gridHolder.style.pointerEvents == "none")gridHolder.style.pointerEvents = "all";
+            else gridHolder.style.pointerEvents = "none";
+            break;
+    }
+}
+
+
 
 function Win(axis, index, winner){
-    gridHolder.style.pointerEvents = "none";//disables input
+    togglePlayable(false)//disables input
     winner = winner.charAt(13);
     let winLine = document.getElementById("winLine");
     let Multiplier;
@@ -156,7 +182,7 @@ function Win(axis, index, winner){
         winLine.style = null
         document.getElementsByClassName("winner")[0].classList.remove("winner")
         //trigger endscreen or sum bullshit LIKE ANIMATION
-        gridHolder.style.pointerEvents = "all";
+        togglePlayable(true)
     }, 2000);
 }
 
