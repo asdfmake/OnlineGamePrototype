@@ -6,8 +6,51 @@
     <title>X-O</title>
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./winline.css">
+    <link rel="stylesheet" href="./startMenu.css">
 </head>
 <body>
+    <article class="start-menu online">
+        <ul class="start-menu-options">
+            <li>
+                <h2 class="caption">Igraj offline protiv prijatelja</h2>
+                <figure>
+                    <img src="./imgs/wrestling.png" alt="igraj protiv prijatelja">
+                </figure>
+                <button>Igraj!</button>
+            </li>
+            <li>
+                <h2 class="caption">Igraj protiv kompjutera (comming soon)</h2>
+                <figure>
+                    <img src="./imgs/robot.png" alt="igraj protiv prijatelja">
+                </figure>
+                <button>Igraj!</button>
+            </li>
+            <li>
+                <h2 class="caption">Igraj online protiv prijatelja</h2>
+                <figure>
+                    <img src="./imgs/player-versus-player.png" alt="igraj protiv prijatelja">
+                </figure>
+                <button>Igraj!</button>
+            </li>
+        </ul>
+
+        <div class="online-menu">
+            <span class="create-room">
+                <h2>Create a room</h2>
+                <p id="joinCode"></p>
+                <button>create a room</button>
+            </span>
+
+            <span class="join-room">
+                <h2>Join a room</h2>
+                <div class="roomID-holder">
+                    <input id="roomID" value="">
+                </div>
+                <button>join a room</button>
+            </span>
+        </div>
+    </article>
+
     <main id="game">
 
         <section class="score"><!-- hightlight winner and whose turn is it -->
