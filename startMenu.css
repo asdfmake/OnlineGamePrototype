@@ -1,0 +1,244 @@
+/* add start menu before element which is black */
+.start-menu{
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s;
+}
+
+.start-menu.closed{
+    pointer-events: none;
+    opacity: 0;
+}
+
+.start-menu-options{
+    width: 70%;
+    background-color: white;
+    list-style: none;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.start-menu-options li{
+    position: relative;
+    width: 33.3%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.start-menu-options li .caption{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}
+
+.start-menu-options li figure{
+    width: 80%;
+    height: 80%;
+    margin: 20px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-menu-options li figure img{
+    object-fit: cover;
+    width: 100%;
+}
+
+.start-menu-options li button{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin: 20px;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    padding: 5px 15px;
+    border: 3px solid blue;
+    border-radius: 15px;
+
+    transition: .3s;
+}
+
+.start-menu-options li button:hover{
+    box-shadow: 0px 0px 15px black;
+    transform: scale(1.1);
+}
+
+.start-menu-options li button:active{
+    box-shadow: none;
+    transform: scale(.9);
+}
+
+.start-menu-options li::after{
+    position: absolute;
+    content: "";
+    height: 90%;
+    top: 5%;
+    width: 2px;
+    background-color: rgb(0, 0, 0);
+    right: 0;
+}
+
+.start-menu-options li:last-child:after{
+    display: none;
+}
+
+/* ONLINE MENU SETUP */
+
+.start-menu .online-menu{
+    display: none;
+}
+
+.start-menu.online .start-menu-options{
+    display: none;
+}
+
+.start-menu.online .online-menu{
+    display: block;
+}
+
+.start-menu.online .online-menu{
+    width: 80%;
+    position: relative;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.start-menu .online-menu span{
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.start-menu .online-menu span *{
+    margin: 15px 0;
+    position: relative;
+}
+
+.start-menu .online-menu .create-room::after{
+    content: "";
+    position: absolute;
+    height: 90%;
+    top: 5%;
+    right: 0;
+    width: 2px;
+    background-color: black;
+}
+
+
+.start-menu .online-menu .create-room #joinCode{
+    border: 2px solid blue;
+    padding: 5px 25px;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    min-width: 4rem;
+    min-height: calc(1rem + 10px);
+}
+
+
+.start-menu .online-menu .join-room #roomID{
+    background-color: inherit; /* ligit does nothing lol */    
+}
+
+.start-menu .online-menu .create-room #joinCode::before{
+    content: "Your room ID:";
+    position: absolute;
+    top: -1.1rem;
+    left: 0;
+    font-size: .9rem;
+    width: 100%;
+}
+
+.start-menu .online-menu .join-room .roomID-holder::before{
+    content: "Input room ID to join:";
+    position: absolute;
+    top: calc(-1.1rem + 15px);
+    left: 0;
+    font-size: .9rem;
+}
+
+.start-menu .online-menu span button{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    font-weight: bold;
+
+    padding: 5px 15px;
+    border: 2px solid black;
+    border-radius: 15px;
+
+    transition: .3s;
+}
+
+.start-menu .online-menu span button:hover{
+    box-shadow: 0px 0px 15px black;
+    transform: scale(1.1);
+}
+
+.start-menu .online-menu span button:active{
+    box-shadow: none;
+    transform: scale(.9);
+}
+
+.sub-menu-back{
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    padding: 0 !important;
+    top: 10px;
+    left: 10px;
+    border: 1px solid black;
+    border-radius: 7px;
+    transition: .2s;
+    z-index: 1;
+}
+
+.sub-menu-back svg{
+    width: 100%;
+    height: 100%;
+}
+
+.sub-menu-back:hover{
+    box-shadow: 0px 0px 15px black;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.sub-menu-back:active{
+    box-shadow: none;
+    transform: scale(.9);
+}

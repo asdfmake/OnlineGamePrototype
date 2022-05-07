@@ -6,8 +6,56 @@
     <title>X-O</title>
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./winline.css">
+    <link rel="stylesheet" href="./startMenu.css">
 </head>
 <body>
+    <article class="start-menu online" id="startMenu">
+        <ul class="start-menu-options">
+            <li>
+                <h2 class="caption">Igraj offline protiv prijatelja</h2>
+                <figure>
+                    <img src="./imgs/wrestling.png" alt="igraj protiv prijatelja">
+                </figure>
+                <button id="PlayOffline">Igraj!</button>
+            </li>
+            <li>
+                <h2 class="caption">Igraj protiv kompjutera (comming soon)</h2>
+                <figure>
+                    <img src="./imgs/robot.png" alt="igraj protiv prijatelja">
+                </figure>
+                <button id="PlayWithBot">Igraj!</button>
+            </li>
+            <li>
+                <h2 class="caption">Igraj online protiv prijatelja</h2>
+                <figure>
+                    <img src="./imgs/player-versus-player.png" alt="igraj protiv prijatelja">
+                </figure>
+                <button id="PlayOnline">Igraj!</button>
+            </li>
+        </ul>
+
+        <div class="online-menu">
+            <span class="sub-menu-back" id="OnlineBack">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+            </span>
+            <span class="create-room">
+                <h2>Create a room</h2>
+                <p id="joinCode"></p>
+                <button id="CreateRoom">create a room</button>
+            </span>
+
+            <span class="join-room">
+                <h2>Join a room</h2>
+                <div class="roomID-holder">
+                    <input id="roomID" value="">
+                </div>
+                <button id="JoinRoom">join a room</button>
+            </span>
+        </div>
+    </article>
+
     <main id="game">
 
         <section class="score"><!-- hightlight winner and whose turn is it -->
@@ -45,5 +93,6 @@
     </main>
 
     <script src="./index.js"></script>
+    <script src="./startMenu.js"></script>
 </body>
 </html>
