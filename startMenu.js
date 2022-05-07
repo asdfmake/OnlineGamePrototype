@@ -18,14 +18,13 @@ document.getElementById("OnlineBack").addEventListener("click", ()=>{
     startMenu.classList.remove("online")
 })
 
-
 /* CREATE AND JOIN A ROOM */
 document.getElementById("CreateRoom").addEventListener("click", ()=>{
-    console.log("Create room")
+    createRoom().then(roomId => document.getElementById("joinCode").innerHTML = roomId)
 })
 
-document.getElementById("JoinRoom").addEventListener("click", ()=>{
-    console.log("Join room")
+document.getElementById("JoinRoom").addEventListener("click", (e)=>{
+    joinRoom(document.getElementById("roomID").value);
 })
 /* FUNCTIONS */
 function OpenStartMenu(){

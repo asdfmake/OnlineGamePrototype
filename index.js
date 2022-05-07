@@ -35,6 +35,13 @@ function Pick(e){
 
     if(grid[coordinates.row][coordinates.col] != null)return;//checks if field is empty
 
+    if(gamemode == "online"){
+        OnlineUpdateGrid(coordinates.row, coordinates.col, shape)
+
+        return;
+    }
+
+
     addToGrid(coordinates.row, coordinates.col, shape);
     UpdateGrid(grid)
 
@@ -112,6 +119,7 @@ function CheckGrid(){
 }
 
 function togglePlayable(playable){
+    console.log(playable)
     switch(playable){
         case true:
             gridHolder.style.pointerEvents = "all";
@@ -119,14 +127,37 @@ function togglePlayable(playable){
         case false:
             gridHolder.style.pointerEvents = "none";
             break;
-        case null:
+        case undefined:
             if(gridHolder.style.pointerEvents == "none")gridHolder.style.pointerEvents = "all";
             else gridHolder.style.pointerEvents = "none";
             break;
     }
 }
 
+function togglePlayingShape(shape){
+    switch (shape) {
+        case "x":
+            document.getElementById("scoreO").parentNode.classList.remove("playing")
+            document.getElementById("scoreX").parentNode.classList.add("playing")
+            break;
 
+        case "x":
+            document.getElementById("scoreO").parentNode.classList.add("playing")
+            document.getElementById("scoreX").parentNode.classList.remove("playing")
+            break;
+            
+        case undefined:
+            if(document.getElementById("scoreO").parentNode.classList.contains("playing")){
+                document.getElementById("scoreO").parentNode.classList.remove("playing")
+                document.getElementById("scoreX").parentNode.classList.add("playing")
+            }
+            else{
+                document.getElementById("scoreO").parentNode.classList.add("playing")
+                document.getElementById("scoreX").parentNode.classList.remove("playing")
+            }
+            break;
+    }
+}
 
 function Win(axis, index, winner){
     togglePlayable(false)//disables input

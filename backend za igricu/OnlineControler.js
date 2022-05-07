@@ -14,16 +14,19 @@ io.on("connection", (socket)=>{
         console.log("successfully created a room with id: " + room.roomID)
     })
 
-    socket.on("joinRoom", (roomId, callback)=>{//vrv ne treba callback
+    socket.on("joinRoom", (roomId, callback)=>{//check ako je isti socket 1 i socke 2
+        let room;
         try {
-            let room = findRoom(roomId)
+            room = findRoom(roomId)
             room.socket2 = socket.id;
             callback("successfully joined a room with id: " + roomId)
         } catch (error) {
             callback("failed to join a room!")
+            return;
         }
-        
-        //optional join room alert to other client
+
+        io.to(room.socket1).emit("startGame");
+        io.to(room.socket2).emit("startGame");
     })
 
     socket.on("updateGrid", (roomId, row, col, shape)=>{
