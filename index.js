@@ -1,10 +1,10 @@
 
 let grid = [[null, null, null], [null, null, null], [null, null, null]];
-//let grid = [[], [], []]
 let gridHolder = document.getElementById("xoGrid");
 let fields = Array.from(gridHolder.querySelectorAll(".field"));
-let gamemode = "";
-let shape = '<span class="x"></span>';
+
+let shape = 'x';
+let gamemode;
 
 function UpdateGrid(NewGrid){ //remove when got some shit
 
@@ -15,7 +15,8 @@ function UpdateGrid(NewGrid){ //remove when got some shit
                 fields[f].innerHTML = null;
             }
             else{
-                fields[f].innerHTML = NewGrid[i][j];
+                console.log(NewGrid[i][j])
+                fields[f].innerHTML = `<span class="${NewGrid[i][j]}"></span>`;
             }
             
             f++;
@@ -42,22 +43,30 @@ function Pick(e){
         return;
     }
     CheckGrid()
+
+    //check if gamemode is online and if its not change shape
+    if(gamemode == "online") return
     ChangeShape()
+    
 }
+
+
+function ChceckIfFull(){}//finish
 
 function addToGrid(row, col, shape){
     if(grid[row][col] != null)return;//DOUBLE checks if field is empty
     grid[row][col] = shape;
 }
 
+
 function ChangeShape(){//HIGHLIGHT WHOS TURN IS IT
-    if(shape == '<span class="x"></span>'){
-        shape = '<span class="o"></span>'
+    if(shape == 'x'){
+        shape = 'o'
         document.getElementById("scoreX").parentNode.classList.remove("playing")
         document.getElementById("scoreO").parentNode.classList.add("playing")
     }
     else{
-        shape = '<span class="x"></span>'
+        shape = 'x'
         document.getElementById("scoreO").parentNode.classList.remove("playing")
         document.getElementById("scoreX").parentNode.classList.add("playing")
     }

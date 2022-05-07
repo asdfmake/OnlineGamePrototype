@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="createRoom()">createRoom</button>
+    <button onclick="joinRoom()">Join Room</button>
+    <button onclick="getRooms()">Get rooms</button>
+    <button onclick="updateGrid(1, 1, 'x')">Update grid</button>
+
+    <button onclick="testWin()">Check win status</button>
+
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+
+    <script>
+        const socket = io("ws://localhost")
+        let roomID;
+
+        socket.on("connect", ()=>{
+            console.log(socket.id)
+
+            socket.on("updateGrid", (grid)=>{
+                console.log(grid)
+            })
+
+            socket.on("Win", (type, index, winner)=>{
+                console.log(type, index, winner)
+            })
+
+        })
+
+        
+
+        function createRoom(){
+            socket.emit("createRoom", (response) => {
+                console.log(response)
+                roomID = response;
+            })
+        }
+
+        function joinRoom(RoomID){
+
+            socket.emit("joinRoom", roomID, (response) => {//change roomID to variable
+                console.log(response)
+                roomID = response;
+            })
+        }
+
+        function getRooms(){
+            socket.emit("getRooms", (response) => {
+                console.log(response)
+            })
+        }
+
+        function updateGrid(row, col, shape){
+            console.log("sending data: ", row, col, shape)
+            socket.emit("updateGrid", roomID,  row, col, shape)
+        }
+
+        function testWin(){
+           socket.emit("testWinCondition", roomID); 
+        }
+
+    </script>
+</body>
+</html>
