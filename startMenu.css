@@ -1,4 +1,9 @@
 /* add start menu before element which is black */
+.start-menu button{
+    user-select: none !important;
+    outline: none !important;
+}
+
 .start-menu{
     z-index: 5;
     position: absolute;
@@ -24,15 +29,18 @@
     list-style: none;
     border: 1px solid black;
     border-radius: 15px;
-    display: flex;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    /* display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: row; */
 }
 
 .start-menu-options li{
+    padding: 20px 0;
     position: relative;
-    width: 33.3%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +77,7 @@
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	outline: inherit;
+	outline: none;
     margin: 20px;
     font-weight: bold;
     font-size: 1.5rem;
@@ -123,11 +131,12 @@
     width: 80%;
     position: relative;
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: row;
     align-items: center;
     background-color: white;
     border: 1px solid black;
     border-radius: 15px;
+    text-align: center;
 }
 
 .start-menu .online-menu span{
@@ -182,7 +191,7 @@
 .start-menu .online-menu .join-room .roomID-holder::before{
     content: "Input room ID to join:";
     position: absolute;
-    top: calc(-1.1rem + 15px);
+    top: calc(-1.1rem + 10px);
     left: 0;
     font-size: .9rem;
 }
@@ -194,7 +203,7 @@
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	outline: inherit;
+	outline: none;
     font-weight: bold;
 
     padding: 5px 15px;
@@ -241,4 +250,91 @@
 .sub-menu-back:active{
     box-shadow: none;
     transform: scale(.9);
+}
+
+@media only screen and (max-width: 832px) {
+    .start-menu .start-menu-options{
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 606px) {
+    .start-menu .start-menu-options *{
+        padding: 0;
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .start-menu .start-menu-options{
+        grid-template-columns: auto auto;
+        max-height: 98%;
+        padding-bottom: 20px;
+    }
+
+    .start-menu .start-menu-options li{
+        margin: 10px 0;
+        height: 100%;
+    }
+
+    .start-menu .start-menu-options li:last-child{
+        padding-top: 5px;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .start-menu .start-menu-options li:last-child figure{
+        width: 50%;
+        margin-bottom: 5px;
+    }
+
+    .start-menu-options li::after{
+        position: absolute;
+        content: "";
+        height: 90%;
+        top: 5%;
+        width: 2px;
+        background-color: rgb(0, 0, 0);
+        left: 0;
+    }
+
+    .start-menu-options li:first-child:after{
+        top: calc(100% + 2px);
+        height: 2px;
+        left: 5px;
+        width: 190%;
+    }
+
+    .start-menu-options button{
+        padding: 10px 25px !important;
+    }
+}
+
+@media only screen and (max-width: 762px) {
+    .start-menu.online .online-menu{
+        flex-direction: column;
+        width: 60%;
+    }
+    .start-menu .online-menu .create-room::after{
+        content: "";
+        position: absolute;
+        height: 2px;
+        top: 100%;
+        left: 0%;
+        width: 100%;
+        background-color: black;
+    }
+
+    .start-menu .online-menu span{
+        padding: 5px;
+    }
+
+    .start-menu .online-menu span *{
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 374px){
+    .start-menu.online .online-menu{
+        width: 80%;
+    }
 }
