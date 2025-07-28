@@ -7,7 +7,7 @@ let roomID;
 ConnectToServer()
 function ConnectToServer(){
     //socket = io()
-    socket = io("ws://localhost")
+    socket = io()
     socket.on("connect", ()=>{
         /* console.log(socket.id) */
     

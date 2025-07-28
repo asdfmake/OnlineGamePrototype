@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+backend za igricu/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+.vs/
+
+# Build output
+dist/
+build/
+
+# Coverage reports
+coverage/

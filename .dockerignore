@@ -1,0 +1,4 @@
+backend za igricu/node_modules
+.vs/
+.vscode/
+node_modules/
